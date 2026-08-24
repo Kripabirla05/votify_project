@@ -1,10 +1,3 @@
-// Seed data for the app. Everything starts empty: an admin creates the election
-// categories, candidates apply and get approved, and voters register themselves
-// - nothing is pre-populated and no demo accounts exist.
-//
-// To load a sample data set for a walkthrough, fill these arrays and bump
-// SEED_VERSION below so cached localStorage snapshots are cleared.
-
 export const initialCategories = [];
 
 export const initialCandidates = [];
@@ -17,11 +10,6 @@ export const initialAnnouncements = [];
 
 export const initialActivityLogs = [];
 
-// Bumping this string wipes every cached `smartvote_*` entry in localStorage
-// so the app reseeds from the arrays above on the next load. Bump it whenever
-// the seed data changes shape or copy - otherwise browsers that already
-// stored the old snapshot keep showing stale (or empty) categories,
-// candidates and voters.
 export const SEED_VERSION = '2026.08-empty-2';
 
 const VERSION_KEY = 'smartvote_seed_version';
@@ -38,8 +26,6 @@ export const ensureFreshSeedData = () => {
 
   if (stored === SEED_VERSION) return false;
 
-  // Drop every key this app owns, including the cached demo user, so nothing
-  // half-migrated survives the reset.
   const stale = [];
   for (let i = 0; i < localStorage.length; i += 1) {
     const key = localStorage.key(i);

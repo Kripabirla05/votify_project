@@ -8,13 +8,9 @@ import {
   initialActivityLogs
 } from '../data/mockData';
 
-// ===================== Auth =====================
-
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // Nobody is signed in until they log in or register - there are no
-  // pre-seeded accounts.
   const [currentUser, setCurrentUser] = useState(() => {
     const saved = localStorage.getItem('smartvote_user');
     if (saved) {
@@ -35,8 +31,6 @@ export const AuthProvider = ({ children }) => {
     }
   }, [currentUser]);
 
-  // No-op: the toast popup UI has been removed, but call sites across the
-  // app still call addToast(), so it stays as a harmless stub.
   const addToast = () => {};
 
   const login = (role, email, password) => {
@@ -53,8 +47,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signup = (role, formData) => {
-    // The session is persisted to localStorage, so never carry the credentials
-    // into it - drop them before the profile is built.
     const { password: _pw, confirmPassword: _cpw, adminCode: _code, ...profileData } = formData;
 
     const newUser = {
@@ -123,8 +115,6 @@ export const useAuth = () => {
   return context;
 };
 
-// ===================== Theme =====================
-
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
@@ -165,13 +155,8 @@ export const useTheme = () => {
   return context;
 };
 
-// ===================== Voting =====================
-
 const VotingContext = createContext();
 
-// Reads one cached list out of localStorage, falling back to the seed data
-// whenever the entry is missing or corrupt. A stale snapshot from an older seed
-// version is cleared before mount by ensureFreshSeedData() in main.jsx.
 const loadOrSeed = (key, seed) => {
   try {
     const saved = localStorage.getItem(key);
@@ -194,7 +179,6 @@ export const VotingProvider = ({ children }) => {
   const [announcements, setAnnouncements] = useState(() => loadOrSeed('smartvote_announcements', initialAnnouncements));
   const [activityLogs, setActivityLogs] = useState(() => loadOrSeed('smartvote_logs', initialActivityLogs));
 
-  // Sync with localStorage
   useEffect(() => {
     localStorage.setItem('smartvote_categories', JSON.stringify(categories));
   }, [categories]);
@@ -219,7 +203,6 @@ export const VotingProvider = ({ children }) => {
     localStorage.setItem('smartvote_logs', JSON.stringify(activityLogs));
   }, [activityLogs]);
 
-  // Activity logger helper
   const logActivity = (action, details, status = 'Success') => {
     const newLog = {
       id: Date.now() + Math.floor(Math.random() * 1000),
@@ -232,7 +215,6 @@ export const VotingProvider = ({ children }) => {
     setActivityLogs(prev => [newLog, ...prev]);
   };
 
-  // Category Actions
   const addCategory = (categoryData) => {
     const newCategory = {
       id: `cat-${Date.now()}`,
@@ -259,9 +241,6 @@ export const VotingProvider = ({ children }) => {
     addToast('Category removed successfully.', 'info');
   };
 
-  // Candidate Actions
-  // Categories cache a candidate count for their cards; recompute it from the
-  // roster whenever the roster changes so the number never drifts.
   const syncCandidateCounts = (candidateList) => {
     setCategories(prev => prev.map(cat => ({
       ...cat,
@@ -315,9 +294,6 @@ export const VotingProvider = ({ children }) => {
     addToast('Campaign details updated successfully!', 'success');
   };
 
-  // Voter Actions
-  // A voter joins the roll as 'Pending' and needs an admin KYC decision before
-  // their ballot counts - the same approve/reject flow candidates go through.
   const registerVoter = (voterData) => {
     const alreadyOnRoll = voters.some(v => v.email && voterData.email && v.email.toLowerCase() === voterData.email.toLowerCase());
     if (alreadyOnRoll) return null;
@@ -378,14 +354,10 @@ export const VotingProvider = ({ children }) => {
     return voterHistory.some(item => item.category === categoryName);
   };
 
-  // Vote Cast Action
   const castVote = (categoryName, candidate) => {
-    // Ballot numbers run in order for the election year, and the verification
-    // code is a plain 12-digit number the voter can read out over the phone.
     const ballotNumber = `${new Date().getFullYear()}-${String(voterHistory.length + 1).padStart(4, '0')}`;
     const verificationCode = Array.from({ length: 3 }, () => String(Math.floor(1000 + Math.random() * 9000))).join(' ');
 
-    // 1. Increment candidate vote
     setCandidates(prev => prev.map(c => {
       if (c.id === candidate.id) {
         return { ...c, votes: (c.votes || 0) + 1 };
@@ -393,7 +365,6 @@ export const VotingProvider = ({ children }) => {
       return c;
     }));
 
-    // 2. Increment category vote
     setCategories(prev => prev.map(cat => {
       if (cat.name === categoryName) {
         return { ...cat, totalVotes: (cat.totalVotes || 0) + 1 };
@@ -401,7 +372,6 @@ export const VotingProvider = ({ children }) => {
       return cat;
     }));
 
-    // 3. Add to history
     const historyEntry = {
       id: `hist-${Date.now()}`,
       category: categoryName,
@@ -413,10 +383,8 @@ export const VotingProvider = ({ children }) => {
     };
     setVoterHistory(prev => [historyEntry, ...prev]);
 
-    // 4. Log activity
     logActivity('Vote Cast', `Voted in category "${categoryName}" for candidate "${candidate.name}"`);
 
-    // 5. Update voter status
     setVoters(prev => prev.map(v => {
       if (v.id === user?.id || v.email === user?.email) {
         return { ...v, votingStatus: 'Voted', votesCast: (v.votesCast || 0) + 1 };
@@ -427,7 +395,6 @@ export const VotingProvider = ({ children }) => {
     return { receiptId: ballotNumber, verificationCode, historyEntry };
   };
 
-  // Announcements
   const addAnnouncement = (annData) => {
     const newAnn = {
       id: `ann-${Date.now()}`,

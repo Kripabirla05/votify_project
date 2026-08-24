@@ -10,7 +10,6 @@ export const VoterCategories = () => {
   const { categories, hasVotedCategory, castVote } = useVoting();
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Modals state
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
@@ -87,7 +86,6 @@ export const VoterCategories = () => {
         </div>
       )}
 
-      {/* Step 1: Candidate Selection Modal */}
       <VotingModal
         isOpen={isVoteModalOpen}
         onClose={() => setIsVoteModalOpen(false)}
@@ -95,7 +93,6 @@ export const VoterCategories = () => {
         onSelectCandidate={handleSelectCandidateToVote}
       />
 
-      {/* Step 2: Irreversible Confirmation Dialog */}
       <ConfirmVoteModal
         isOpen={isConfirmOpen}
         onClose={() => {
@@ -107,7 +104,6 @@ export const VoterCategories = () => {
         categoryName={selectedCategory?.name}
       />
 
-      {/* Step 3: Success Modal with Verified Receipt Code */}
       <VoteSuccessModal
         isOpen={isSuccessOpen}
         onClose={() => setIsSuccessOpen(false)}

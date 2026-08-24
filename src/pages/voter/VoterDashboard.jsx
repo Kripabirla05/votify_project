@@ -23,7 +23,7 @@ export const VoterDashboard = () => {
 
   return (
     <div>
-      {/* Welcome Card Banner */}
+
       <div
         className="dashboard-panel"
         style={{
@@ -58,7 +58,6 @@ export const VoterDashboard = () => {
         </div>
       </div>
 
-      {/* Metrics Row */}
       <div className="stats-grid">
         <StatCard
           label="Active Elections"
@@ -90,9 +89,8 @@ export const VoterDashboard = () => {
         />
       </div>
 
-      {/* Grid of Content: Active Elections Carousel & Reminders / Announcements */}
       <div className="dashboard-grid-2col">
-        {/* Active Elections Box */}
+
         <div className="dashboard-panel">
           <div className="panel-header">
             <div>
@@ -144,7 +142,6 @@ export const VoterDashboard = () => {
           </div>
         </div>
 
-        {/* Voting Reminders & Announcements */}
         <div className="dashboard-panel">
           <div className="panel-header">
             <h3 className="panel-title">
