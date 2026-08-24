@@ -284,8 +284,6 @@ const VoterDetailField = ({ label, value }) => (
   </div>
 );
 
-// Read-only review sheet for one voter: everything an admin needs to make the
-// KYC call, with Approve / Reject available straight from the modal.
 export const VoterDetailModal = ({
   isOpen,
   onClose,

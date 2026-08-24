@@ -23,8 +23,7 @@ export const AdminDashboard = () => {
   const totalVotesCast = categories.reduce((sum, c) => sum + (c.totalVotes || 0), 0);
   const turnoutPercent = Math.round((voters.filter(v => v.votingStatus === 'Voted').length / (voters.length || 1)) * 100);
 
-  // Voter registry split, derived from the roll itself so an empty registry
-  // renders an empty ring rather than invented percentages.
+
   const kycShare = (status) => (
     voters.length ? Math.round((voters.filter(v => v.kycStatus === status).length / voters.length) * 100) : 0
   );
@@ -55,7 +54,6 @@ export const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* Stats Cards Grid */}
       <div className="stats-grid">
         <StatCard
           label="Total Voters"
@@ -94,9 +92,8 @@ export const AdminDashboard = () => {
         />
       </div>
 
-      {/* Analytics & Charts Breakdown */}
       <div className="dashboard-grid-2col">
-        {/* Category Turnout Bars */}
+     
         <ChartCard
           title="Turnout by Election Category"
           subtitle="Real-time ballot volume per contested post"
@@ -123,7 +120,6 @@ export const AdminDashboard = () => {
           </div>
         </ChartCard>
 
-        {/* Voter KYC Status Donut Simulation */}
         <ChartCard
           title="Voter Registry Status"
           subtitle="Verification & eligibility ratio"
@@ -182,7 +178,6 @@ export const AdminDashboard = () => {
         </ChartCard>
       </div>
 
-      {/* Recent Activity Table */}
       <div className="dashboard-panel">
         <div className="panel-header">
           <div>

@@ -55,7 +55,7 @@ export const AdminCategories = () => {
         </div>
       </div>
 
-      {/* Filter and Search Toolbar */}
+      
       <div className="filter-toolbar">
         <SearchBar
           value={searchTerm}
@@ -163,7 +163,7 @@ export const AdminCategories = () => {
         </div>
       )}
 
-      {/* Add / Edit Category Modal */}
+      
       <AddCategoryModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}

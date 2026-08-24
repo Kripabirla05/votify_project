@@ -1,25 +1,9 @@
 import React from 'react';
-
-/*
- * GlobalStyles
- * ------------
- * All of the app's plain-CSS design system, embedded directly in a
- * React component (no external .css files). Rendered once near the
- * root of the app in App.jsx via <GlobalStyles />, it injects a single
- * <style> tag so every page/component below it can keep using the same
- * class names (form-input, card, sidebar, toast-item, etc.) exactly as
- * before.
- */
 const css = `
-/* ===== global.css ===== */
-/* ==========================================================================
-   SMARTVOTE DESIGN SYSTEM & GLOBAL STYLES
-   ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  /* Color Palette - Light Mode */
   --bg-main: #f8fafc;
   --bg-subtle: #f1f5f9;
   --surface: #ffffff;
@@ -33,7 +17,6 @@ const css = `
   --text-muted: #94a3b8;
   --text-inverse: #ffffff;
 
-  /* Brand Accents */
   --primary: #4f46e5;
   --primary-hover: #4338ca;
   --primary-light: rgba(79, 70, 229, 0.1);
@@ -51,14 +34,12 @@ const css = `
   --info: #3b82f6;
   --info-light: rgba(59, 130, 246, 0.12);
 
-  /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
   --shadow-glow: 0 0 25px rgba(79, 70, 229, 0.25);
 
-  /* Dimensions & Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
@@ -70,17 +51,14 @@ const css = `
   --topbar-height: 70px;
   --bottom-nav-height: 64px;
 
-  /* Font Families */
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Transition speeds */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.25s ease;
   --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Dark Mode Theme */
 .dark, [data-theme="dark"] {
   --bg-main: #090d16;
   --bg-subtle: #0f172a;
@@ -107,7 +85,6 @@ const css = `
   --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.35);
 }
 
-/* Base Resets */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -132,7 +109,7 @@ html, body {
   flex-direction: column;
 }
 
-/* Typography Helpers */
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: var(--text-primary);
@@ -149,7 +126,6 @@ small { font-size: 0.825rem; color: var(--text-muted); }
 a { color: var(--primary); text-decoration: none; transition: color var(--transition-fast); }
 a:hover { color: var(--primary-hover); }
 
-/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -244,7 +220,6 @@ a:hover { color: var(--primary-hover); }
   border-radius: var(--radius-lg);
 }
 
-/* Status Badges */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -289,7 +264,6 @@ a:hover { color: var(--primary-hover); }
   color: var(--text-secondary);
 }
 
-/* Form Controls */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -337,7 +311,6 @@ a:hover { color: var(--primary-hover); }
   margin-top: 0.2rem;
 }
 
-/* Small explanatory line under a field - eligibility rules, format notes. */
 .form-hint {
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -400,7 +373,6 @@ a:hover { color: var(--primary-hover); }
   animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Floating Role Switcher Pill */
 .role-demo-pill {
   position: fixed;
   bottom: 24px;
@@ -443,7 +415,6 @@ a:hover { color: var(--primary-hover); }
   box-shadow: 0 2px 8px var(--primary-glow);
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -461,12 +432,6 @@ a:hover { color: var(--primary-hover); }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
-
-
-/* ===== dashboard.css ===== */
-/* ==========================================================================
-   DASHBOARD & MAIN VIEWPORT STYLES
-   ========================================================================== */
 
 .app-layout-wrapper {
   display: flex;
@@ -495,7 +460,6 @@ a:hover { color: var(--primary-hover); }
   margin: 0 auto;
 }
 
-/* Page Header Banner */
 .page-header-banner {
   display: flex;
   align-items: flex-start;
@@ -526,7 +490,7 @@ a:hover { color: var(--primary-hover); }
   gap: 0.75rem;
 }
 
-/* Stat Cards Grid */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -614,7 +578,6 @@ a:hover { color: var(--primary-hover); }
   color: var(--warning);
 }
 
-/* Dashboard Sections Grid */
 .dashboard-grid-2col {
   display: grid;
   grid-template-columns: 2fr 1.2fr;
@@ -657,7 +620,6 @@ a:hover { color: var(--primary-hover); }
   gap: 0.5rem;
 }
 
-/* Data Tables */
 .table-responsive-wrapper {
   overflow-x: auto;
   border-radius: var(--radius-md);
@@ -701,7 +663,6 @@ a:hover { color: var(--primary-hover); }
   background-color: var(--bg-subtle);
 }
 
-/* Charts (Pure CSS / SVG custom built bars & donuts) */
 .css-chart-bar-container {
   display: flex;
   flex-direction: column;
@@ -737,7 +698,6 @@ a:hover { color: var(--primary-hover); }
   transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Donut Chart Simulation */
 .donut-stat-wrapper {
   display: flex;
   align-items: center;
@@ -771,7 +731,7 @@ a:hover { color: var(--primary-hover); }
   border-radius: 3px;
 }
 
-/* Filter Bar & Search */
+
 .filter-toolbar {
   display: flex;
   align-items: center;
@@ -788,7 +748,7 @@ a:hover { color: var(--primary-hover); }
   flex-wrap: wrap;
 }
 
-/* Activity Feed */
+
 .activity-feed-list {
   display: flex;
   flex-direction: column;
@@ -841,11 +801,6 @@ a:hover { color: var(--primary-hover); }
 }
 
 
-/* ===== sidebar.css ===== */
-/* ==========================================================================
-   SIDEBAR NAVIGATION STYLES
-   ========================================================================== */
-
 .app-sidebar {
   position: fixed;
   top: 0;
@@ -864,7 +819,7 @@ a:hover { color: var(--primary-hover); }
   width: var(--sidebar-collapsed-width);
 }
 
-/* Sidebar Header */
+
 .sidebar-header {
   height: var(--topbar-height);
   display: flex;
@@ -934,7 +889,7 @@ a:hover { color: var(--primary-hover); }
   color: var(--text-primary);
 }
 
-/* Sidebar Menu */
+
 .sidebar-content {
   flex: 1;
   overflow-y: auto;
@@ -1015,7 +970,7 @@ a:hover { color: var(--primary-hover); }
   color: #ffffff;
 }
 
-/* Sidebar Footer */
+
 .sidebar-footer {
   padding: 1rem 0.85rem;
   border-top: 1px solid var(--border-color);
@@ -1045,7 +1000,7 @@ a:hover { color: var(--primary-hover); }
   background-color: var(--danger-light);
 }
 
-/* Collapsed State Tweaks */
+
 .app-sidebar.collapsed .brand-text,
 .app-sidebar.collapsed .sidebar-nav-section,
 .app-sidebar.collapsed .nav-text,
@@ -1068,11 +1023,6 @@ a:hover { color: var(--primary-hover); }
   display: none;
 }
 
-
-/* ===== navbar.css ===== */
-/* ==========================================================================
-   TOPBAR / NAVBAR STYLES
-   ========================================================================== */
 
 .app-topbar {
   height: var(--topbar-height);
@@ -1106,7 +1056,6 @@ a:hover { color: var(--primary-hover); }
   border-radius: var(--radius-sm);
 }
 
-/* Global Search Bar */
 .topbar-search {
   position: relative;
   width: 320px;
@@ -1140,7 +1089,7 @@ a:hover { color: var(--primary-hover); }
   pointer-events: none;
 }
 
-/* Topbar Right Actions */
+
 .topbar-right {
   display: flex;
   align-items: center;
@@ -1179,7 +1128,7 @@ a:hover { color: var(--primary-hover); }
   border: 2px solid var(--surface);
 }
 
-/* Notification Dropdown Menu */
+
 .dropdown-menu-wrapper {
   position: relative;
 }
@@ -1250,7 +1199,6 @@ a:hover { color: var(--primary-hover); }
   color: var(--text-muted);
 }
 
-/* Profile Dropdown */
 .profile-trigger-btn {
   display: flex;
   align-items: center;
@@ -1354,19 +1302,13 @@ a:hover { color: var(--primary-hover); }
 }
 
 
-/* ===== cards.css ===== */
-/* ==========================================================================
-   CARDS & COMPONENT STYLES
-   ========================================================================== */
 
-/* Grid of Cards */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
 }
 
-/* Category Card */
 .category-card {
   background: var(--surface);
   border: 1px solid var(--border-color);
@@ -1445,7 +1387,7 @@ a:hover { color: var(--primary-hover); }
   border-top: 1px solid var(--border-color);
 }
 
-/* Candidate Card */
+
 .candidate-card {
   background: var(--surface);
   border: 1px solid var(--border-color);
@@ -1720,12 +1662,6 @@ a:hover { color: var(--primary-hover); }
   color: var(--text-primary);
 }
 
-
-/* ===== modal.css ===== */
-/* ==========================================================================
-   MODAL & DIALOG STYLES
-   ========================================================================== */
-
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -1890,12 +1826,6 @@ a:hover { color: var(--primary-hover); }
   margin-bottom: 1rem;
 }
 
-/* ===== responsive.css ===== */
-/* ==========================================================================
-   RESPONSIVE LAYOUT & MOBILE BOTTOM NAVIGATION
-   ========================================================================== */
-
-/* Mobile Bottom Navigation Bar */
 .mobile-bottom-nav {
   display: none;
   position: fixed;

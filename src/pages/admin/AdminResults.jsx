@@ -33,7 +33,6 @@ export const AdminResults = () => {
         </div>
       </div>
 
-      {/* Analytics Highlights */}
       <div className="stats-grid">
         <StatCard
           label="Total Votes Tabulated"
@@ -65,7 +64,6 @@ export const AdminResults = () => {
         />
       </div>
 
-      {/* Category Filter Tabs */}
       <div style={{ display: 'flex', gap: '0.65rem', overflowX: 'auto', paddingBottom: '0.75rem', marginBottom: '1.5rem' }}>
         {categories.map((cat) => (
           <button
@@ -80,7 +78,7 @@ export const AdminResults = () => {
         ))}
       </div>
 
-      {/* Results Breakdown Grid */}
+  
       <div className="dashboard-grid-2col">
         {/* Candidate Ranking Cards */}
         <div className="dashboard-panel">
@@ -152,7 +150,7 @@ export const AdminResults = () => {
           )}
         </div>
 
-        {/* Visual Charts Card */}
+        
         <ChartCard
           title="Vote Distribution Visualizer"
           subtitle={selectedCategory

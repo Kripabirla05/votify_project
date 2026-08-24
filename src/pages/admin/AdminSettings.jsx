@@ -56,7 +56,7 @@ export const AdminSettings = () => {
       </div>
 
       <div>
-        {/* General Election Configuration */}
+      
         <div className="dashboard-panel">
           <div className="panel-header">
             <h3 className="panel-title">Electoral System Rules</h3>

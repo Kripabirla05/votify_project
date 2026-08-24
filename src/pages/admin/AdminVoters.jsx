@@ -36,8 +36,7 @@ export const AdminVoters = () => {
           <p>Central voter roll, KYC clearance checks, and ballot authorization controls.</p>
         </div>
       </div>
-
-      {/* Filter and Search Toolbar */}
+    
       <div className="filter-toolbar">
         <SearchBar
           value={searchTerm}
@@ -135,7 +134,7 @@ export const AdminVoters = () => {
                       </span>
                     </td>
                     <td>
-                      {/* Two per row, equal width, centred under the column. */}
+
                       <div
                         style={{
                           display: 'grid',
@@ -190,8 +189,7 @@ export const AdminVoters = () => {
           </div>
         </div>
       )}
-
-      {/* Voter KYC Review Modal */}
+       
       <VoterDetailModal
         isOpen={Boolean(voterToReview)}
         onClose={() => setVoterToReview(null)}
@@ -200,7 +198,6 @@ export const AdminVoters = () => {
         onReject={(voter) => setVoterToReject(voter)}
       />
 
-      {/* Voter KYC Rejection Modal */}
       <RejectionModal
         isOpen={Boolean(voterToReject)}
         onClose={() => setVoterToReject(null)}
