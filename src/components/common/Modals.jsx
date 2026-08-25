@@ -8,7 +8,7 @@ export const Modal = ({
   subtitle,
   children,
   footer,
-  size = "normal", // 'sm' | 'normal' | 'lg'
+  size = "normal", 
   maxWidth
 }) => {
   useEffect(() => {
@@ -71,7 +71,7 @@ export const ConfirmModal = ({
   highlightText,
   confirmText = "Confirm",
   cancelText = "Cancel",
-  type = "warning", // 'warning' | 'danger' | 'primary' | 'success'
+  type = "warning",
   isLoading = false
 }) => {
   const getIcon = () => {
