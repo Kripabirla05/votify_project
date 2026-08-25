@@ -65,7 +65,7 @@ export const CandidateCampaign = () => {
       </div>
 
       <div className="dashboard-grid-2col">
-        {/* Editor Form */}
+        
         <div className="dashboard-panel">
           <div className="panel-header">
             <h3 className="panel-title">Campaign Information</h3>
@@ -139,7 +139,7 @@ export const CandidateCampaign = () => {
           </form>
         </div>
 
-        {/* Live Voter Ballot Preview */}
+        
         <div className="dashboard-panel">
           <div className="panel-header">
             <h3 className="panel-title">
