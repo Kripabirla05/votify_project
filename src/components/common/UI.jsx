@@ -93,14 +93,7 @@ export const EmptyState = ({
   );
 };
 
-/*
- * Reveal
- * ------
- * Thin wrapper around the useScrollReveal custom hook: wrap any block of
- * markup in <Reveal> and it fades/slides into view the first time it
- * scrolls into the viewport. `as` lets it render as a <section>, <div>,
- * etc. so the landing page keeps its semantic HTML5 structure.
- */
+
 export const Reveal = ({ as: Tag = 'div', delay = 0, className = '', children, ...rest }) => {
   const [ref, isVisible] = useScrollReveal();
 
