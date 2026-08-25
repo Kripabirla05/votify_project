@@ -42,12 +42,12 @@ export const CandidateVotes = () => {
         </div>
       </div>
 
-      {/* Demo Data Notice */}
+   
       <div style={{ background: 'var(--primary-light)', border: '1px solid var(--primary-glow)', padding: '0.85rem 1.25rem', borderRadius: 'var(--radius-md)', marginBottom: '1.75rem', fontSize: '0.875rem', color: 'var(--primary)' }}>
         ℹ️ <strong>Live Tally:</strong> Vote counts and percent shares update reactively across the entire application the moment any voter casts a ballot.
       </div>
 
-      {/* Stat Cards */}
+    
       <div className="stats-grid">
         <StatCard
           label="My Votes"
@@ -79,7 +79,7 @@ export const CandidateVotes = () => {
         />
       </div>
 
-      {/* Competitors & Progress Bar Breakdown */}
+      
       <div className="dashboard-grid-2col">
         <ChartCard
           title="Contestant Vote Distribution"
@@ -117,7 +117,7 @@ export const CandidateVotes = () => {
           </div>
         </ChartCard>
 
-        {/* Voting Integrity Card */}
+       
         <div className="dashboard-panel">
           <div className="panel-header">
             <h3 className="panel-title">Ballot Audit Certificate</h3>
