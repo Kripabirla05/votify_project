@@ -180,8 +180,7 @@ export const ProfileView = ({ title = "Account Profile" }) => {
 
   const [errors, setErrors] = useState({});
 
-  // Same age floor the registration forms enforce, so an edit cannot make an
-  // account ineligible after the fact.
+ 
   const minAge = minAgeForRole(user?.role);
   const age = calculateAge(user?.dob);
 
@@ -225,7 +224,7 @@ export const ProfileView = ({ title = "Account Profile" }) => {
       </div>
 
       <div>
-        {/* Profile Card */}
+        
         <div className="dashboard-panel">
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '1rem 0' }}>
             <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>{user?.name}</h2>
@@ -274,7 +273,7 @@ export const ProfileView = ({ title = "Account Profile" }) => {
         </div>
       </div>
 
-      {/* Edit Profile Modal */}
+     
       <Modal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
