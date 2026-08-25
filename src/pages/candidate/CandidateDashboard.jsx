@@ -28,8 +28,7 @@ export const CandidateDashboard = () => {
 
   const categoryInfo = categories.find(c => c.name === candidateData.category);
 
-  // Milestones track the real application, so the timeline never claims an
-  // approval that has not happened yet.
+  
   const applied = Boolean(candidateData.appliedDate);
   const reviewStep = {
     Approved: { icon: '✓', title: 'Board Review Approved', body: 'Candidate verified and published to the ballot' },
@@ -79,7 +78,7 @@ export const CandidateDashboard = () => {
         </div>
       </div>
 
-      {/* Large Application Status Banner */}
+      
       <div
         className="dashboard-panel"
         style={{
@@ -147,7 +146,7 @@ export const CandidateDashboard = () => {
         )}
       </div>
 
-      {/* Stats Cards Grid */}
+      
       <div className="stats-grid">
         <StatCard
           label="My Ballot Tally"
@@ -179,7 +178,7 @@ export const CandidateDashboard = () => {
         />
       </div>
 
-      {/* Campaign Summary & Manifesto Box */}
+      
       <div className="dashboard-grid-2col">
         <div className="dashboard-panel">
           <div className="panel-header">
