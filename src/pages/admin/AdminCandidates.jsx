@@ -47,7 +47,7 @@ export const AdminCandidates = () => {
         </div>
       </div>
 
-      
+      {/* Filter and Search Bar */}
       <div className="filter-toolbar">
         <SearchBar
           value={searchTerm}
@@ -55,6 +55,7 @@ export const AdminCandidates = () => {
           placeholder="Search by name, email, or post..."
           style={{ width: '280px' }}
         />
+
 
         <div className="filter-group">
           <select
@@ -103,14 +104,14 @@ export const AdminCandidates = () => {
         </div>
       )}
 
-      
+      {/* Candidate Detail Modal */}
       <CandidateDetailModal
         isOpen={isDetailOpen}
         onClose={() => setIsDetailOpen(false)}
         candidate={selectedCandidate}
       />
 
-      
+      {/* Candidate Rejection Modal */}
       <RejectionModal
         isOpen={isRejectOpen}
         onClose={() => setIsRejectOpen(false)}

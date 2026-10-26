@@ -55,12 +55,12 @@ export const AdminCategories = () => {
         </div>
       </div>
 
-      
+      {/* Filter and Search Toolbar */}
       <div className="filter-toolbar">
         <SearchBar
           value={searchTerm}
           onChange={setSearchTerm}
-          placeholder="Filter categories..."
+          placeholder="Search categories..."
           style={{ width: '300px' }}
         />
 
@@ -163,7 +163,7 @@ export const AdminCategories = () => {
         </div>
       )}
 
-      
+      {/* Add / Edit Category Modal */}
       <AddCategoryModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}

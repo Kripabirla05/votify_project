@@ -83,7 +83,7 @@ export const AdminAnnouncements = () => {
         </div>
       )}
 
-     
+      {/* Add Announcement Modal */}
       <Modal
         isOpen={isAddOpen}
         onClose={() => setIsAddOpen(false)}

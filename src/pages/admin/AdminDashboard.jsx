@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { StatCard, ChartCard } from '../../components/common/Cards';
-import { StatusBadge } from '../../components/common/UI';
 import { useVoting } from '../../context/AppContext';
 import {
   UsersIcon,
@@ -15,7 +14,7 @@ import {
 } from '../../assets/icons';
 
 export const AdminDashboard = () => {
-  const { categories, candidates, voters, activityLogs } = useVoting();
+  const { categories, candidates, voters } = useVoting();
 
   const totalVoters = voters.length;
   const totalCandidates = candidates.length;
@@ -23,7 +22,8 @@ export const AdminDashboard = () => {
   const totalVotesCast = categories.reduce((sum, c) => sum + (c.totalVotes || 0), 0);
   const turnoutPercent = Math.round((voters.filter(v => v.votingStatus === 'Voted').length / (voters.length || 1)) * 100);
 
-
+  // Voter registry split, derived from the roll itself so an empty registry
+  // renders an empty ring rather than invented percentages.
   const kycShare = (status) => (
     voters.length ? Math.round((voters.filter(v => v.kycStatus === status).length / voters.length) * 100) : 0
   );
@@ -54,6 +54,7 @@ export const AdminDashboard = () => {
         </div>
       </div>
 
+      {/* Stats Cards Grid */}
       <div className="stats-grid">
         <StatCard
           label="Total Voters"
@@ -92,8 +93,9 @@ export const AdminDashboard = () => {
         />
       </div>
 
+      {/* Analytics & Charts Breakdown */}
       <div className="dashboard-grid-2col">
-     
+        {/* Category Turnout Bars */}
         <ChartCard
           title="Turnout by Election Category"
           subtitle="Real-time ballot volume per contested post"
@@ -120,6 +122,7 @@ export const AdminDashboard = () => {
           </div>
         </ChartCard>
 
+        {/* Voter KYC Status Donut Simulation */}
         <ChartCard
           title="Voter Registry Status"
           subtitle="Verification & eligibility ratio"
@@ -176,46 +179,6 @@ export const AdminDashboard = () => {
             </div>
           </div>
         </ChartCard>
-      </div>
-
-      <div className="dashboard-panel">
-        <div className="panel-header">
-          <div>
-            <h3 className="panel-title">
-              <ActivityIcon size={20} />
-              Recent Electoral Activity Trail
-            </h3>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Cryptographic timestamps of voter and admin actions</p>
-          </div>
-          <Link to="/admin/activity-logs" className="btn btn-secondary btn-sm">Full Audit Trail</Link>
-        </div>
-
-        <div className="table-responsive-wrapper">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Action</th>
-                <th>Actor</th>
-                <th>Details</th>
-                <th>Timestamp</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {activityLogs.slice(0, 5).map((log) => (
-                <tr key={log.id}>
-                  <td><strong>{log.action}</strong></td>
-                  <td>{log.user}</td>
-                  <td>{log.details}</td>
-                  <td><span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{log.timestamp}</span></td>
-                  <td>
-                    <StatusBadge status={log.status} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
   );
