@@ -1,45 +1,67 @@
 import React from 'react';
+
+/*
+ * GlobalStyles
+ * ------------
+ * All of the app's plain-CSS design system, embedded directly in a
+ * React component (no external .css files). Rendered once near the
+ * root of the app in App.jsx via <GlobalStyles />, it injects a single
+ * <style> tag so every page/component below it can keep using the same
+ * class names (form-input, card, sidebar, toast-item, etc.) exactly as
+ * before.
+ */
 const css = `
+/* ===== global.css ===== */
+/* ==========================================================================
+   SMARTVOTE DESIGN SYSTEM & GLOBAL STYLES
+   ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
+/* Votify palette - the same navy / gold / cream used on the landing page and
+   the login screen, so every portal feels like part of one product. */
 :root {
-  --bg-main: #f8fafc;
-  --bg-subtle: #f1f5f9;
-  --surface: #ffffff;
-  --surface-elevated: #ffffff;
-  --surface-glass: rgba(255, 255, 255, 0.85);
-  --border-color: #e2e8f0;
-  --border-glass: rgba(226, 232, 240, 0.8);
-  
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --text-inverse: #ffffff;
+  /* Color Palette - Light Mode (cream "ballot paper") */
+  --bg-main: #F6F4EC;
+  --bg-subtle: #EFECE2;
+  --surface: #FBFAF6;
+  --surface-elevated: #FEFDFB;
+  --surface-glass: rgba(251, 250, 246, 0.88);
+  --border-color: #E4DFD0;
+  --border-glass: rgba(228, 223, 208, 0.8);
 
-  --primary: #4f46e5;
-  --primary-hover: #4338ca;
-  --primary-light: rgba(79, 70, 229, 0.1);
-  --primary-glow: rgba(79, 70, 229, 0.25);
-  
-  --accent: #06b6d4;
-  --accent-light: rgba(6, 182, 212, 0.1);
-  
-  --success: #10b981;
-  --success-light: rgba(16, 185, 129, 0.12);
-  --warning: #f59e0b;
-  --warning-light: rgba(245, 158, 11, 0.12);
-  --danger: #ef4444;
-  --danger-light: rgba(239, 68, 68, 0.12);
-  --info: #3b82f6;
-  --info-light: rgba(59, 130, 246, 0.12);
+  --text-primary: #10192E;
+  --text-secondary: #4A5468;
+  --text-muted: #7B8394;
+  --text-inverse: #F6F4EC;
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-  --shadow-glow: 0 0 25px rgba(79, 70, 229, 0.25);
+  /* Brand Accents: navy ink + gold */
+  --primary: #10192E;
+  --primary-hover: #1B2A4A;
+  --primary-light: rgba(16, 25, 46, 0.08);
+  --primary-glow: rgba(16, 25, 46, 0.22);
+  --on-primary: #FFFFFF;
 
+  --accent: #B8863A;
+  --accent-light: rgba(184, 134, 58, 0.14);
+
+  --success: #2F6B4F;
+  --success-light: rgba(47, 107, 79, 0.13);
+  --warning: #B7791F;
+  --warning-light: rgba(183, 121, 31, 0.14);
+  --danger: #9B2335;
+  --danger-light: rgba(155, 35, 53, 0.12);
+  --info: #5B6472;
+  --info-light: rgba(91, 100, 114, 0.14);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(16, 25, 46, 0.06);
+  --shadow-md: 0 4px 8px -1px rgba(16, 25, 46, 0.09), 0 2px 4px -2px rgba(16, 25, 46, 0.05);
+  --shadow-lg: 0 12px 20px -4px rgba(16, 25, 46, 0.1), 0 4px 6px -4px rgba(16, 25, 46, 0.05);
+  --shadow-xl: 0 24px 32px -6px rgba(16, 25, 46, 0.14), 0 8px 10px -6px rgba(16, 25, 46, 0.06);
+  --shadow-glow: 0 0 25px rgba(184, 134, 58, 0.28);
+
+  /* Dimensions & Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
@@ -51,40 +73,18 @@ const css = `
   --topbar-height: 70px;
   --bottom-nav-height: 64px;
 
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* Font Families */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
+  /* Transition speeds */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.25s ease;
   --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dark, [data-theme="dark"] {
-  --bg-main: #090d16;
-  --bg-subtle: #0f172a;
-  --surface: #131c2e;
-  --surface-elevated: #1a243a;
-  --surface-glass: rgba(19, 28, 46, 0.85);
-  --border-color: #1e293b;
-  --border-glass: rgba(255, 255, 255, 0.08);
-
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-inverse: #0f172a;
-
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --primary-light: rgba(99, 102, 241, 0.15);
-  --primary-glow: rgba(99, 102, 241, 0.35);
-
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.6);
-  --shadow-xl: 0 24px 40px -8px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.35);
-}
-
+/* Base Resets */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -109,11 +109,12 @@ html, body {
   flex-direction: column;
 }
 
-
+/* Typography Helpers */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-weight: 600;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
   line-height: 1.25;
 }
 
@@ -126,6 +127,7 @@ small { font-size: 0.825rem; color: var(--text-muted); }
 a { color: var(--primary); text-decoration: none; transition: color var(--transition-fast); }
 a:hover { color: var(--primary-hover); }
 
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -156,12 +158,12 @@ a:hover { color: var(--primary-hover); }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-  color: #ffffff;
+  color: var(--on-primary);
   box-shadow: 0 4px 12px var(--primary-glow);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--primary-hover), #3730a3);
+  background: linear-gradient(135deg, var(--primary-hover), var(--primary));
   box-shadow: 0 6px 18px var(--primary-glow);
   transform: translateY(-1px);
 }
@@ -178,15 +180,15 @@ a:hover { color: var(--primary-hover); }
 }
 
 .btn-success {
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, #3A8561, #2F6B4F);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 4px 12px rgba(47, 107, 79, 0.28);
 }
 
 .btn-danger {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
+  background: linear-gradient(135deg, #B02A3E, #7A1F2B);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+  box-shadow: 0 4px 12px rgba(122, 31, 43, 0.28);
 }
 
 .btn-outline {
@@ -220,6 +222,7 @@ a:hover { color: var(--primary-hover); }
   border-radius: var(--radius-lg);
 }
 
+/* Status Badges */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -264,6 +267,7 @@ a:hover { color: var(--primary-hover); }
   color: var(--text-secondary);
 }
 
+/* Form Controls */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -311,6 +315,7 @@ a:hover { color: var(--primary-hover); }
   margin-top: 0.2rem;
 }
 
+/* Small explanatory line under a field - eligibility rules, format notes. */
 .form-hint {
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -373,6 +378,7 @@ a:hover { color: var(--primary-hover); }
   animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Floating Role Switcher Pill */
 .role-demo-pill {
   position: fixed;
   bottom: 24px;
@@ -411,10 +417,11 @@ a:hover { color: var(--primary-hover); }
 
 .role-demo-pill .role-btn.active {
   background: var(--primary);
-  color: #ffffff;
+  color: var(--on-primary);
   box-shadow: 0 2px 8px var(--primary-glow);
 }
 
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -432,6 +439,12 @@ a:hover { color: var(--primary-hover); }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+
+
+/* ===== dashboard.css ===== */
+/* ==========================================================================
+   DASHBOARD & MAIN VIEWPORT STYLES
+   ========================================================================== */
 
 .app-layout-wrapper {
   display: flex;
@@ -460,6 +473,7 @@ a:hover { color: var(--primary-hover); }
   margin: 0 auto;
 }
 
+/* Page Header Banner */
 .page-header-banner {
   display: flex;
   align-items: flex-start;
@@ -490,7 +504,7 @@ a:hover { color: var(--primary-hover); }
   gap: 0.75rem;
 }
 
-
+/* Stat Cards Grid */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -578,6 +592,7 @@ a:hover { color: var(--primary-hover); }
   color: var(--warning);
 }
 
+/* Dashboard Sections Grid */
 .dashboard-grid-2col {
   display: grid;
   grid-template-columns: 2fr 1.2fr;
@@ -620,6 +635,7 @@ a:hover { color: var(--primary-hover); }
   gap: 0.5rem;
 }
 
+/* Data Tables */
 .table-responsive-wrapper {
   overflow-x: auto;
   border-radius: var(--radius-md);
@@ -663,6 +679,7 @@ a:hover { color: var(--primary-hover); }
   background-color: var(--bg-subtle);
 }
 
+/* Charts (Pure CSS / SVG custom built bars & donuts) */
 .css-chart-bar-container {
   display: flex;
   flex-direction: column;
@@ -698,6 +715,7 @@ a:hover { color: var(--primary-hover); }
   transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Donut Chart Simulation */
 .donut-stat-wrapper {
   display: flex;
   align-items: center;
@@ -731,7 +749,7 @@ a:hover { color: var(--primary-hover); }
   border-radius: 3px;
 }
 
-
+/* Filter Bar & Search */
 .filter-toolbar {
   display: flex;
   align-items: center;
@@ -748,7 +766,7 @@ a:hover { color: var(--primary-hover); }
   flex-wrap: wrap;
 }
 
-
+/* Activity Feed */
 .activity-feed-list {
   display: flex;
   flex-direction: column;
@@ -801,6 +819,11 @@ a:hover { color: var(--primary-hover); }
 }
 
 
+/* ===== sidebar.css ===== */
+/* ==========================================================================
+   SIDEBAR NAVIGATION STYLES
+   ========================================================================== */
+
 .app-sidebar {
   position: fixed;
   top: 0;
@@ -819,7 +842,7 @@ a:hover { color: var(--primary-hover); }
   width: var(--sidebar-collapsed-width);
 }
 
-
+/* Sidebar Header */
 .sidebar-header {
   height: var(--topbar-height);
   display: flex;
@@ -841,7 +864,7 @@ a:hover { color: var(--primary-hover); }
   height: 40px;
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: #ffffff;
+  color: var(--on-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -857,8 +880,9 @@ a:hover { color: var(--primary-hover); }
 }
 
 .brand-name {
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
   color: var(--text-primary);
   line-height: 1.2;
 }
@@ -889,7 +913,7 @@ a:hover { color: var(--primary-hover); }
   color: var(--text-primary);
 }
 
-
+/* Sidebar Menu */
 .sidebar-content {
   flex: 1;
   overflow-y: auto;
@@ -967,10 +991,10 @@ a:hover { color: var(--primary-hover); }
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-full);
   background: var(--primary);
-  color: #ffffff;
+  color: var(--on-primary);
 }
 
-
+/* Sidebar Footer */
 .sidebar-footer {
   padding: 1rem 0.85rem;
   border-top: 1px solid var(--border-color);
@@ -1000,7 +1024,7 @@ a:hover { color: var(--primary-hover); }
   background-color: var(--danger-light);
 }
 
-
+/* Collapsed State Tweaks */
 .app-sidebar.collapsed .brand-text,
 .app-sidebar.collapsed .sidebar-nav-section,
 .app-sidebar.collapsed .nav-text,
@@ -1023,6 +1047,11 @@ a:hover { color: var(--primary-hover); }
   display: none;
 }
 
+
+/* ===== navbar.css ===== */
+/* ==========================================================================
+   TOPBAR / NAVBAR STYLES
+   ========================================================================== */
 
 .app-topbar {
   height: var(--topbar-height);
@@ -1056,6 +1085,7 @@ a:hover { color: var(--primary-hover); }
   border-radius: var(--radius-sm);
 }
 
+/* Global Search Bar */
 .topbar-search {
   position: relative;
   width: 320px;
@@ -1089,11 +1119,12 @@ a:hover { color: var(--primary-hover); }
   pointer-events: none;
 }
 
-
+/* Topbar Right Actions */
 .topbar-right {
   display: flex;
   align-items: center;
   gap: 0.85rem;
+  margin-left: auto;
 }
 
 .topbar-action-btn {
@@ -1128,7 +1159,7 @@ a:hover { color: var(--primary-hover); }
   border: 2px solid var(--surface);
 }
 
-
+/* Notification Dropdown Menu */
 .dropdown-menu-wrapper {
   position: relative;
 }
@@ -1199,6 +1230,7 @@ a:hover { color: var(--primary-hover); }
   color: var(--text-muted);
 }
 
+/* Profile Dropdown */
 .profile-trigger-btn {
   display: flex;
   align-items: center;
@@ -1302,13 +1334,19 @@ a:hover { color: var(--primary-hover); }
 }
 
 
+/* ===== cards.css ===== */
+/* ==========================================================================
+   CARDS & COMPONENT STYLES
+   ========================================================================== */
 
+/* Grid of Cards */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
 }
 
+/* Category Card */
 .category-card {
   background: var(--surface);
   border: 1px solid var(--border-color);
@@ -1387,7 +1425,7 @@ a:hover { color: var(--primary-hover); }
   border-top: 1px solid var(--border-color);
 }
 
-
+/* Candidate Card */
 .candidate-card {
   background: var(--surface);
   border: 1px solid var(--border-color);
@@ -1662,6 +1700,12 @@ a:hover { color: var(--primary-hover); }
   color: var(--text-primary);
 }
 
+
+/* ===== modal.css ===== */
+/* ==========================================================================
+   MODAL & DIALOG STYLES
+   ========================================================================== */
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -1826,6 +1870,12 @@ a:hover { color: var(--primary-hover); }
   margin-bottom: 1rem;
 }
 
+/* ===== responsive.css ===== */
+/* ==========================================================================
+   RESPONSIVE LAYOUT & MOBILE BOTTOM NAVIGATION
+   ========================================================================== */
+
+/* Mobile Bottom Navigation Bar */
 .mobile-bottom-nav {
   display: none;
   position: fixed;
@@ -1972,6 +2022,59 @@ a:hover { color: var(--primary-hover); }
   }
 }
 
+
+/* ==========================================================================
+   VOTIFY BRAND OVERRIDES
+   Deep-navy sidebar in both themes (matches the landing + login screens) and
+   a few finishing touches on cards, stat tiles and form focus states.
+   ========================================================================== */
+.app-sidebar {
+  --text-primary: #F6F4EC;
+  --text-secondary: rgba(237, 234, 224, 0.78);
+  --text-muted: rgba(237, 234, 224, 0.5);
+  --bg-subtle: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --primary: #D4A24C;
+  --primary-hover: #E3B766;
+  --primary-light: rgba(212, 162, 76, 0.16);
+  --primary-glow: rgba(212, 162, 76, 0.28);
+  --accent: #F0CE87;
+  --on-primary: #10192E;
+  --danger: #F08A97;
+  --danger-light: rgba(240, 138, 151, 0.14);
+  /* Same colour as the left panel on the login / sign-up screen. */
+  background-color: #1B2A4A;
+  background-image:
+    radial-gradient(260px 220px at 0% 0%, rgba(212, 162, 76, 0.16), transparent 70%),
+    radial-gradient(240px 260px at 100% 100%, rgba(47, 107, 79, 0.16), transparent 70%);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.app-sidebar .brand-role-tag {
+  color: var(--primary);
+  letter-spacing: 0.18em;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+}
+
+.app-sidebar .sidebar-nav-section {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+}
+
+.app-sidebar .sidebar-nav-link.active {
+  box-shadow: inset 0 0 0 1px rgba(212, 162, 76, 0.22);
+}
+
+.stat-card-value {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto; }
+}
 `;
 
 export default function GlobalStyles() {

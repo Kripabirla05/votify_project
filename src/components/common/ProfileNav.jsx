@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth, useTheme, useVoting } from '../../context/AppContext';
+import { useAuth, useVoting } from '../../context/AppContext';
 import { InputField } from './FormFields';
 import { Modal } from './Modals';
-import { BellIcon, UserIcon, SettingsIcon, SunIcon, MoonIcon, LogoutIcon, EditIcon } from '../../assets/icons';
+import { BellIcon, UserIcon, LogoutIcon, EditIcon } from '../../assets/icons';
 import { minAgeForRole, maxDobForAge, validateDob, calculateAge, formatDob } from '../../utils/age';
 
 export const NotificationDropdown = () => {
@@ -66,7 +66,6 @@ export const NotificationDropdown = () => {
 export const ProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, role, logout } = useAuth();
-  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
@@ -90,11 +89,6 @@ export const ProfileDropdown = () => {
     if (role === 'admin') return '/admin/profile';
     if (role === 'candidate') return '/candidate/profile';
     return '/voter/profile';
-  };
-
-  const getSettingsLink = () => {
-    if (role === 'admin') return '/admin/settings';
-    return getProfileLink();
   };
 
   return (
@@ -129,27 +123,6 @@ export const ProfileDropdown = () => {
             My Profile
           </Link>
 
-          <Link
-            to={getSettingsLink()}
-            className="profile-menu-item"
-            onClick={() => setIsOpen(false)}
-          >
-            <SettingsIcon size={16} />
-            Account Settings
-          </Link>
-
-          <button
-            type="button"
-            className="profile-menu-item"
-            onClick={() => {
-              toggleTheme();
-              setIsOpen(false);
-            }}
-          >
-            {theme === 'dark' ? <SunIcon size={16} /> : <MoonIcon size={16} />}
-            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-          </button>
-
           <div className="profile-menu-divider" />
 
           <button
@@ -180,7 +153,8 @@ export const ProfileView = ({ title = "Account Profile" }) => {
 
   const [errors, setErrors] = useState({});
 
- 
+  // Same age floor the registration forms enforce, so an edit cannot make an
+  // account ineligible after the fact.
   const minAge = minAgeForRole(user?.role);
   const age = calculateAge(user?.dob);
 
@@ -224,7 +198,7 @@ export const ProfileView = ({ title = "Account Profile" }) => {
       </div>
 
       <div>
-        
+        {/* Profile Card */}
         <div className="dashboard-panel">
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '1rem 0' }}>
             <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>{user?.name}</h2>
@@ -273,7 +247,7 @@ export const ProfileView = ({ title = "Account Profile" }) => {
         </div>
       </div>
 
-     
+      {/* Edit Profile Modal */}
       <Modal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
