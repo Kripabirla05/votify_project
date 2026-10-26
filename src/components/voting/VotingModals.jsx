@@ -29,6 +29,8 @@ export const ApplyModal = ({
 
   const candidateAge = calculateAge(formData.dob);
 
+  // Writing into a field clears that field's error, so a message from an
+  // earlier submit does not sit there contradicting what is now typed in.
   const setField = (name, value) => {
     setFormData(prev => ({ ...prev, [name]: value }));
     setErrors(prev => (prev[name] ? { ...prev, [name]: undefined } : prev));
@@ -46,6 +48,8 @@ export const ApplyModal = ({
     { icon: '📚', name: 'Knowledge Torch' }
   ];
 
+  // Everything is checked in one pass so all outstanding problems show at
+  // once, rather than one error per attempt.
   const validate = () => {
     const errs = {};
     if (!formData.name.trim()) errs.name = 'Name is required';
